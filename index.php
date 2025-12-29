@@ -1,11 +1,10 @@
 <?php
-session_start();
 include "include/header.php";
 $errors = $_SESSION["errors"] ?? [];
 ?>
 
 
-    <div class="col-lg-5 mx-auto ">
+    <div class="col-lg-5 mx-auto">
         <div class="card">
             <div class="card-header py-3">
                 Add Todo

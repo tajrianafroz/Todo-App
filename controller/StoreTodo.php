@@ -1,4 +1,7 @@
 <?php
+
+use function PHPSTORM_META\type;
+
 session_start();
 $title = $_REQUEST['title'];
 $detail = $_REQUEST['detail'];
@@ -43,6 +46,17 @@ if(count($errors) > 0)
     // Redirecting
     $_SESSION['errors'] = $errors;
     header("Location: ../index.php");
+}else{
+    include "../database/env.php";
+    $query = "INSERT INTO `todos`(`title`, `detail`, `deadline`) VALUES ('$title','$detail','$deadline')";
+    $res = mysqli_query($connect, $query);
+    print_r($res);
+    if($res)
+    {
+        $_SESSION['message'] = [
+            'type' => 'success',
+            'content' => 'Todo added successfully',
+        ];
+        header("Location: ../all-todos.php");
+    }
 }
-
-echo "Todo added successfully!";
